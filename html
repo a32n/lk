@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spelling Practice</title>
+</head>
+<body>
+  <h2>Spelling Listening Test</h2>
+
+  <label for="originalText">Enter words (up to 20):</label><br>
+  <textarea id="originalText" rows="3" cols="60"></textarea><br><br>
+
+  <button onclick="speakText()">Speak</button>
+  <br><br>
+
+  <label for="userInput">What did you hear? Type below:</label><br>
+  <textarea id="userInput" rows="3" cols="60"></textarea><br><br>
+
+  <button onclick="checkSpelling()">Check</button>
+  <p id="result"></p>
+
+  <script>
+    function speakText() {
+      const text = document.getElementById('originalText').value;
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
+    }
+
+    function checkSpelling() {
+      const original = document.getElementById('originalText').value.trim().toLowerCase();
+      const userInput = document.getElementById('userInput').value.trim().toLowerCase();
+      
+      if (original === userInput) {
+        document.getElementById('result').textContent = "✅ Correct!";
+      } else {
+        document.getElementById('result').textContent = "❌ Incorrect. Try again.";
+      }
+    }
+  </script>
+</body>
+</html>
